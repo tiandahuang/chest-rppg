@@ -134,3 +134,16 @@ def crop_video(input_path, output='array', output_path=None,
 
     if output == 'array': return np.array(output_frames)
     else: return output_path
+
+def smear(arr, mean=True):
+    if mean:
+        return np.mean(arr, axis=0).astype(int)[:,:,[2,1,0]]
+    else:
+        return np.std(arr, axis=0).mean(axis=-1).astype(int)
+
+def resize_func(f, array, size):
+    # example usage: resize_func(np.mean, arr, 3)
+    t, h, w = array.shape
+    h_new, w_new = h//size, w//size
+    flattened = np.reshape(array, (t, h_new, size, w_new, size)).swapaxes(2, 3).reshape(t, h_new, w_new, size**2)
+    return f(flattened, axis=-1)
