@@ -161,3 +161,4 @@ cython_debug/
 
 # Ignore videos
 *.mp4
+*.npy
