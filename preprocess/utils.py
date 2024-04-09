@@ -123,7 +123,7 @@ def crop_video(input_path, output='array', output_path=None,
 
         cropped_frame = frame[bottom_left[1]:bottom_left[1]+crop_height, 
                                 bottom_left[0]:bottom_left[0]+crop_width]
-        resized_frame = cv2.resize(cropped_frame, (new_width, new_height), interpolation=cv2.INTER_LINEAR)
+        resized_frame = cv2.resize(cropped_frame, (new_width, new_height), interpolation=cv2.INTER_AREA)
         
         if output == 'array': output_frames.append(resized_frame)
         else: out.write(resized_frame)
